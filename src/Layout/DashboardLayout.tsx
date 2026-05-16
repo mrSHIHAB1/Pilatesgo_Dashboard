@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
 import Sidebar from "../components/Dashboard/Sidebar";
-import Topbar from "../components/Dashboard/Topbar";
 
 
 export default function DashboardLayout() {
@@ -21,13 +20,13 @@ export default function DashboardLayout() {
       )}
 
       {/* Main Content Area */}
-      <main className="flex-1 lg:ml-24 p-4 md:p-8 bg-[#EAEAEA] min-h-screen transition-all duration-300">
+      <main className="flex-1 lg:ml-64 bg-[#EAEAEA] min-h-screen transition-all duration-300">
         <div className="w-full">
           {/* Reusable TopBar */}
-          <Topbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+        
 
           {/* Page Content (Dashboard, Tickets, etc.) */}
-          <section className="mt-2 md:pl-5">
+          <section className="w-full">
             <Outlet />
           </section>
         </div>

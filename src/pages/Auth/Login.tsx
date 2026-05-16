@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function Login() {
   const [email, setEmail] = useState('admin@pilatesglo.com');
   const [password, setPassword] = useState('password123');
-  const [error, setError] = useState(
+  const [error] = useState(
     'Invalid email or password. Please try again.'
   );
 
