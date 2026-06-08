@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
 
 export default function Login() {
   const [email, setEmail] = useState('admin@pilatesglo.com');
@@ -78,12 +79,11 @@ export default function Login() {
               </span>
             </label>
 
-            <a
-              href="#"
+            <Link to="/forgot-password"
               className="text-[#FFB1D1] font-medium hover:underline"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit */}

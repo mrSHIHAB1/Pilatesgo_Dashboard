@@ -13,7 +13,7 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-500 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-white p-4">
       {/* Main Card */}
       <div className="w-full max-w-md bg-white rounded-[40px] shadow-xl p-10 font-sans relative">
         
@@ -49,7 +49,6 @@ const ForgotPassword: React.FC = () => {
               className="w-full px-5 py-4 bg-[#F9F9F9] border border-[#EEEEEE] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FFB1D1] transition-all"
             />
           </div>
-
           {/* Send Reset Link Button */}
           <button
             type="submit"
@@ -72,5 +71,4 @@ const ForgotPassword: React.FC = () => {
     </div>
   );
 };
-
 export default ForgotPassword;

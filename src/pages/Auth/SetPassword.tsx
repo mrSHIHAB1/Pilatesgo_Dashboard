@@ -17,7 +17,7 @@ const SetPassword: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-500 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-white p-4">
       {/* Main Card */}
       <div className="w-full max-w-md bg-white rounded-[40px] shadow-xl p-10 font-sans">
         
