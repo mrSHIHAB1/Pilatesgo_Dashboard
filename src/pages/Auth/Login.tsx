@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import useAuth from '../../hooks/useAuth';
 
 export default function Login() {
-  const [email, setEmail] = useState('admin@pilatesglo.com');
-  const [password, setPassword] = useState('password123');
-  const [error] = useState(
-    'Invalid email or password. Please try again.'
-  );
+  const { login, loading } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
 
-    console.log('Logging in with:', {
-      email,
-      password,
-    });
-
-    // login logic here
+    try {
+      await login({ email, password });
+      navigate('/dashboard');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Invalid email or password. Please try again.');
+      }
+    }
   };
 
   return (
@@ -48,6 +55,8 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="admin@example.com"
               className="w-full px-5 py-4 bg-[#F9F9F9] border border-[#EEEEEE] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FFB1D1] transition-all"
             />
           </div>
@@ -62,6 +71,8 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="••••••••"
               className="w-full px-5 py-4 bg-[#F9F9F9] border border-[#EEEEEE] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FFB1D1] transition-all text-xl"
             />
           </div>
@@ -89,9 +100,10 @@ export default function Login() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-[#FFB1D1] hover:bg-[#ff9dc5] text-white font-bold py-4 rounded-3xl transition-colors text-xl shadow-sm"
+            disabled={loading}
+            className="w-full bg-[#FFB1D1] hover:bg-[#ff9dc5] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-3xl transition-colors text-xl shadow-sm"
           >
-            Sign In
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
 
           {/* Error */}

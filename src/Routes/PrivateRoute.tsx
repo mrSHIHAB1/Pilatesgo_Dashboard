@@ -1,11 +1,9 @@
 import { Navigate, Outlet } from "react-router";
 
 const PrivateRoute = () => {
-
     const isAuthenticated = localStorage.getItem("accessToken");
-
-    // Allow access during local development while UI is being built.
-    if (!isAuthenticated && !import.meta.env.DEV) {
+   
+    if (!isAuthenticated) {
         return <Navigate to="/login" replace />;
     }
 

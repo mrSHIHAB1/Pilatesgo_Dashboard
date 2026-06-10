@@ -78,11 +78,20 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
                 localStorage.setItem("accessToken", accessToken);
             }
 
-            await loadUser();
+            // Fetch the user profile and enforce ADMIN-only access
+            const meRes = await axiosPublic.get("/auth/me");
+            const loggedInUser = meRes.data?.data;
+            if (loggedInUser?.role !== "ADMIN") {
+                // Not an admin – revoke the token and reject
+                localStorage.removeItem("accessToken");
+                setUser(null);
+                throw new Error("Access denied. Only administrators can log in to this dashboard.");
+            }
+
+            setUser(loggedInUser);
         } finally {
             setLoading(false);
         }
-
     };
 
 
